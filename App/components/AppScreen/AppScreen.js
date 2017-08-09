@@ -62,6 +62,12 @@ export default class AppScreen extends React.Component {
                         selectedPerson={this.state.selectedPerson}
                         onSelect={this.updateSelectedUser}
                      />
+                     <Home 
+                        user={this.state.user}
+                    />
+                    <Description 
+                        user={this.state.user}
+                    />
                 </View>
         )
     }

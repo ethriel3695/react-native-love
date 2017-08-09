@@ -7,13 +7,13 @@ export default function Navigation (props) {
             {props.users.users.user.map((user) => {
                 return (
                     <TouchableHighlight 
-                        style={styles.navContainer} 
+                        style={styles.navContainer}
                         activeOpacity={0.6}
                         underlayColor={'#E6E6E6'}
                         key={user.name}
                         onPress={props.onSelect.bind(null, user.name)}>
                     <Text 
-                        style={styles.nav} 
+                        style={{color: '#d0021b'}}
                         className={user.name === props.selectedPerson ? 'active' : ''}
                         key={user.name}
                         //onPress={props.onSelect.bind(null, user.name)}
@@ -29,23 +29,17 @@ export default function Navigation (props) {
 
 const styles = StyleSheet.create({
 container: {
+    marginTop: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     flex: 1,
     backgroundColor: '#D7D7D5',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 navContainer: {
-    flex: 1,
-    width: 500,
-    padding: 20,
+    padding: 10,
     backgroundColor: '#D7D7D5',
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 5
-  },
-  nav: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1
   }
 });

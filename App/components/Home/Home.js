@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
 var xDown = null;
 var yDown = null;
@@ -103,12 +103,13 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <View className='home-container'>
+            <View style={styles.homeContainer}>
                 <Text className='header'>{this.props.user.name}</Text>
                 <View className='imageContainer'>
+                {/*
                     <View className='carouselContainer'>
-                        {this.props.user.images.map((image, index, front) => {
-                        return (
+                    {this.props.user.images.map((image, index, front) => {
+                    return (
                             <Image className={'carouselImages pic' + index}
                                 src={image} alt='This is alex'
                                 data-first='0'
@@ -126,6 +127,7 @@ export default class Home extends React.Component {
                         )
                     })}   
                     </View>
+                    */}
                     <View className="moveRight"
                         onClick={this.rotateImages}></View>
                     <View className="moveLeft"
@@ -135,3 +137,14 @@ export default class Home extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+homeContainer: {
+    alignItems: 'center'
+  },
+navContainer: {
+    padding: 10,
+    backgroundColor: '#D7D7D5',
+    borderRadius: 5
+  }
+});

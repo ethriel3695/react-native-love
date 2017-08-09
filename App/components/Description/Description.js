@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default class Description extends React.Component {
     render() {
         return (
-            <View className='descriptionContainer'>
-            <Text className='descriptionHeader'>Why I love {this.props.user.name}</Text>
-                <View className='descriptionList'>
+            <View style={styles.container}>
+            <Text style={styles.descriptionHeader}>Why I love {this.props.user.name}</Text>
+                <View style={styles.descriptionList}>
                 {this.props.user.description.map((text) => {
                 return (
-                    <Text className='descriptionItem' key={text}>
+                    <Text style={styles.descriptionItem} key={text}>
                         {text}
                     </Text>
                 )
@@ -19,3 +19,24 @@ export default class Description extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+container: {
+    marginTop: 20,
+    flex: 1,
+    backgroundColor: '#D7D7D5',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+descriptionHeader: {
+    padding: 20,
+    alignItems: 'center'
+  },
+descriptionList: {
+  alignItems: 'center'
+  },
+descriptionItem: {
+  alignItems: 'center',
+  padding: 5
+  }
+});

@@ -180,7 +180,7 @@ export const users = {
             name: 'Ethan',
             description: [
                     'I am always astonished by his compassion!',
-                    'He loves being a nerd and talking about video games with me!',
+                    'He loves being a nerd and talking about video games!',
                     'He is always willing to go and experience new things!'
             ],
         //     images: [
@@ -204,7 +204,7 @@ export const users = {
             name: 'Jess',
             description: [
                     'She has more loyalty and love than anyone I know!',
-                    'She always knows what to say to make any situation better!',
+                    'She is supportive of everything I do!',
                     'She is headstrong and a beautiful and inspiring woman!'
             ],
         //     images: [
