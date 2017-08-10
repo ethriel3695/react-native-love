@@ -13,8 +13,8 @@ export default function Navigation (props) {
                         key={user.name}
                         onPress={props.onSelect.bind(null, user.name)}>
                     <Text 
-                        style={{color: '#d0021b'}}
-                        className={user.name === props.selectedPerson ? 'active' : ''}
+                        style={[styles.navText, 
+                          user.name === props.selectedPerson ? styles.active : '']}
                         key={user.name}
                         //onPress={props.onSelect.bind(null, user.name)}
                         >
@@ -32,14 +32,20 @@ container: {
     marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    flex: 1,
+    marginBottom: 20,
     backgroundColor: '#D7D7D5',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-around',
   },
 navContainer: {
     padding: 10,
     backgroundColor: '#D7D7D5',
     borderRadius: 5
-  }
+  },
+navText: {
+  color: '#D0021B'
+},
+active: {
+  color: '#000000'
+}
 });

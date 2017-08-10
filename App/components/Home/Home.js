@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 
 var xDown = null;
 var yDown = null;
@@ -19,18 +19,19 @@ export default class Home extends React.Component {
         this.handleTouchMove = this.handleTouchMove.bind(this);
     }
 
-    handleTouchStart (e) {
-        xDown = e.touches[0].clientX;
-        yDown = e.touches[0].clientY;
+    handleTouchStart (evt) {
+      console.log(evt.nativeEvent.touches[0]);
+        xDown = evt.nativeEvent.touches[0].locationX;
+        yDown = evt.nativeEvent.touches[0].locationY;
     }
 
-    handleTouchMove (e) {
+    handleTouchMove (evt) {
         if (!xDown || !yDown) {
             return;
         }
 
-        var xUp = e.touches[0].clientX;
-        var yUp = e.touches[0].clientY;
+        var xUp = evt.nativeEvent.touches[0].locationX;
+        var yUp = evt.nativeEvent.touches[0].locationY;
 
         var xDiff = xDown - xUp;
         var yDiff = yDown - yUp;
@@ -71,11 +72,11 @@ export default class Home extends React.Component {
         this.updateImagesPosition(0);
     }
 
-    rotateImages(e) {
+    rotateImages(evt) {
         var degreeModifier = 0;
         var classIdentifier = '';
-        if (direction === '' || e !== undefined) {
-            classIdentifier = e.target.className;
+        if (direction === '' || evt !== undefined) {
+            classIdentifier = evt.target.className;
         }
         if (classIdentifier === 'moveLeft' || classIdentifier === 'moveRight') {
             direction = '';
@@ -92,46 +93,43 @@ export default class Home extends React.Component {
             this.updateImagesPosition(this.state.degreeVariation);
         }.bind(this));
     }
-
+//For touch https://facebook.github.io/react-native/docs/gesture-responder-system.html
+//Transforms https://facebook.github.io/react-native/docs/transforms.html
     updateImagesPosition(currentPosition) {
-        //var carouselObject = document.getElementsByClassName("carouselContainer");
-        //carouselObject[0].style.transform = "rotateY(" + currentPosition + "deg)";
-        //carouselObject[0].style.webkitTransform = "rotateY(" + currentPosition + "deg)";
-        //carouselObject[0].style.mozTransform = "rotateY(" + currentPosition + "deg)";
-       // carouselObject[0].style.oTransform = "rotateY(" + currentPosition + "deg)";
+      //   var carouselObject = document.getElementsByClassName("carouselContainer");
+      //   carouselObject[0].style.transform = "rotateY(" + currentPosition + "deg)";
+      //   carouselObject[0].style.webkitTransform = "rotateY(" + currentPosition + "deg)";
+      //   carouselObject[0].style.mozTransform = "rotateY(" + currentPosition + "deg)";
+      //  carouselObject[0].style.oTransform = "rotateY(" + currentPosition + "deg)";
     }
 
     render() {
         return (
             <View style={styles.homeContainer}>
-                <Text className='header'>{this.props.user.name}</Text>
-                <View className='imageContainer'>
-                {/*
-                    <View className='carouselContainer'>
-                    {this.props.user.images.map((image, index, front) => {
+                <View style={styles.imageContainer}>
+                    <View style={styles.carouselContainer}>
+                    {this.props.user.images.map((image, index) => {
+                      var picClass = 'pic' + index;
                     return (
-                            <Image className={'carouselImages pic' + index}
-                                src={image} alt='This is alex'
-                                data-first='0'
-                                key={image + index} 
+                      
+                            <Image style={[styles.carouselImages, styles.picClass]}
+                                source={image}
+                                key={`image ${index}`} 
                                 onTouchStart={this.handleTouchStart}
                                 onTouchMove={this.handleTouchMove}/>
                         )
                     })}    
-                    {this.props.user.imageCaption.map((caption, index) => {
+                    
+                    {/*this.props.user.imageCaption.map((caption, index) => {
                         return (
-                            <Text className={'captionContainer pic' + index}
+                            <Text className={[styles.captionContainer, 
+                              styles.picClass]}
                             key={caption + index}>
                                 {caption}
                             </Text>
                         )
-                    })}   
+                    })*/} 
                     </View>
-                    */}
-                    <View className="moveRight"
-                        onClick={this.rotateImages}></View>
-                    <View className="moveLeft"
-                        onClick={this.rotateImages}></View>
                 </View>
             </View>
         )
@@ -140,11 +138,50 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
 homeContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
-navContainer: {
-    padding: 10,
-    backgroundColor: '#D7D7D5',
-    borderRadius: 5
-  }
+imageContainer: {
+    margin: 0,
+    width: 140,
+    height: 120,
+    position: 'relative',
+    transform: [{perspective: 1000}]
+  },
+carouselContainer: {
+  flex: 1,
+  position: 'absolute',
+  // transformStyle: 'preserve-3d',
+  // transition: 'transform 1s'
+  },
+carouselImages: {
+  display: 'block',
+  position: 'absolute',
+  width: 140,
+  height: 120,
+  alignItems: 'center',
+  borderRadius: 5,
+  zIndex: 1050,
+  // imageOrientation: 'flip'
+  },
+pic0: {
+  transform: [{rotateY: 0}, {translateX: 130}],
+},
+pic1: {
+  transform: [{rotateY: 60}, {translateX: 130}],
+},
+pic2: {
+  transform: [{rotateY: 120}, {translate: 130}],
+},
+pic3: {
+  transform: [{rotateY: 180}, {translate: 130}],
+},
+pic4: {
+  transform: [{rotateY: 240}, {translate: 130}],
+},
+pic5: {
+  transform: [{rotateY: 300}, {translate: 130}],
+},
+captionContainer: {
+  display: 'none'
+}
 });

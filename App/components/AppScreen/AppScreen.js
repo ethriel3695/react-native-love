@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Navigation from '../Navigation/Navigation.js';
 import Description from '../Description/Description.js';
 import Home from '../Home/Home.js';
@@ -62,6 +62,11 @@ export default class AppScreen extends React.Component {
                         selectedPerson={this.state.selectedPerson}
                         onSelect={this.updateSelectedUser}
                      />
+                     <View style={styles.headerContainer}>
+                        <Text style={styles.header}>
+                            {this.state.user.name}
+                        </Text>
+                     </View>
                      <Home 
                         user={this.state.user}
                     />
@@ -72,3 +77,16 @@ export default class AppScreen extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+headerContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+header: {
+  fontSize: 35,
+  marginBottom: 30,
+  alignItems: 'center',
+  justifyContent: 'center'
+},
+});
